@@ -27,7 +27,7 @@ public class ServerProxy extends CommonProxy {
 			public void run() {
 				while (true) {
 					boolean shouldBackup = (System.currentTimeMillis() > startTime
-							+ interval)
+							+ Math.round(0.5 * interval))
 							&& (CCYBackup.playerNumber > 0 || !CCYBackup.saved);
 
 					if (shouldBackup) {
