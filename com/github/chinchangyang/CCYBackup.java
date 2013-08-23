@@ -9,8 +9,9 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = "CCYBackup", name = "CCYBackup", version = "0.0.1")
+@Mod(modid = "CCYBackup", name = "CCYBackup", version = "0.0.2")
 @NetworkMod(clientSideRequired = false, serverSideRequired = true)
 public class CCYBackup {
 
@@ -21,6 +22,10 @@ public class CCYBackup {
 	// Says where the client and server 'proxy' code is loaded.
 	@SidedProxy(clientSide = "com.github.chinchangyang.CommonProxy", serverSide = "com.github.chinchangyang.server.ServerProxy")
 	public static CommonProxy proxy;
+	
+	public static int playerNumber = 0;
+	
+	public static boolean saved = true;
 
 	private int backupInterval;
 
@@ -43,6 +48,7 @@ public class CCYBackup {
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
+		GameRegistry.registerPlayerTracker(new PlayerTracker());
 	}
 
 	@EventHandler

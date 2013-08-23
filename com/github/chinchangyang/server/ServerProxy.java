@@ -9,7 +9,10 @@ import java.io.OutputStream;
 import java.util.Calendar;
 import java.util.logging.Logger;
 
+import com.github.chinchangyang.CCYBackup;
 import com.github.chinchangyang.CommonProxy;
+
+import cpw.mods.fml.server.FMLServerHandler;
 
 public class ServerProxy extends CommonProxy {
 
@@ -23,14 +26,20 @@ public class ServerProxy extends CommonProxy {
 
 			public void run() {
 				while (true) {
-					if (System.currentTimeMillis() > startTime + interval) {
+					boolean shouldBackup = (System.currentTimeMillis() > startTime
+							+ interval)
+							&& (CCYBackup.playerNumber > 0 || !CCYBackup.saved);
+
+					if (shouldBackup) {
+
+						FMLServerHandler.instance().getServer().g("save-all");
 						String backupRootName = getBackupRoot();
 						File backupRoot = new File(backupRootName);
-						
+
 						if (!backupRoot.exists()) {
 							backupRoot.mkdirs();
 						}
-						
+
 						Calendar c = Calendar.getInstance();
 						int year = c.get(Calendar.YEAR);
 						int month = c.MONTH;
@@ -38,23 +47,27 @@ public class ServerProxy extends CommonProxy {
 						int hour = c.HOUR_OF_DAY;
 						int minute = c.MINUTE;
 						int second = c.SECOND;
-						
-						StringBuffer backupFolderName = new StringBuffer(backupRootName + "/");
-						backupFolderName.append(String.format("%1$tY-%1$tm-%1$td-%1$tH-%1$tM-%1$tS", c));
 
-						File backupFolder = new File(backupFolderName.toString());
+						StringBuffer backupFolderName = new StringBuffer(
+								backupRootName + "/");
+						backupFolderName.append(String.format(
+								"%1$tY-%1$tm-%1$td-%1$tH-%1$tM-%1$tS", c));
+
+						File backupFolder = new File(
+								backupFolderName.toString());
 						File srcFolder = new File("world");
-						
+
 						try {
 							copyFolder(srcFolder, backupFolder);
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-						
-						Logger.getLogger("CCYBackup").finest(
-								"Processed backup");
-						
+
+						Logger.getLogger("CCYBackup")
+								.finest("Processed backup");
+
 						startTime = System.currentTimeMillis();
+						CCYBackup.saved = true;
 					}
 
 					try {
