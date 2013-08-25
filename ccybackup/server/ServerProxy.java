@@ -79,7 +79,7 @@ public class ServerProxy extends CommonProxy {
 
 					try {
 						long sleepTime = Math.max(interval, MINIMUM_SLEEP_TIME);
-						Thread.sleep(interval);
+						Thread.sleep(sleepTime);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
