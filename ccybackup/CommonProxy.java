@@ -1,4 +1,4 @@
-package com.github.chinchangyang;
+package ccybackup;
 
 public class CommonProxy {
 	

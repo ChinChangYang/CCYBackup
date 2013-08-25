@@ -1,4 +1,4 @@
-package com.github.chinchangyang;
+package ccybackup;
 
 import net.minecraft.entity.player.EntityPlayer;
 import cpw.mods.fml.common.IPlayerTracker;
@@ -19,13 +19,12 @@ public class PlayerTracker implements IPlayerTracker {
 
 	@Override
 	public void onPlayerChangedDimension(EntityPlayer player) {
-		// TODO Auto-generated method stub
-
+		// nothing to do
 	}
 
 	@Override
 	public void onPlayerRespawn(EntityPlayer player) {
-		// TODO Auto-generated method stub
+		// nothing to do
 
 	}
 

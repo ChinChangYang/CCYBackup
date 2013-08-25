@@ -1,4 +1,4 @@
-package com.github.chinchangyang;
+package ccybackup;
 
 import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.common.Mod;
@@ -11,7 +11,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = "CCYBackup", name = "CCYBackup", version = "0.0.2")
+@Mod(modid = "CCYBackup", name = "CCYBackup", version = "0.0.4")
 @NetworkMod(clientSideRequired = false, serverSideRequired = true)
 public class CCYBackup {
 
@@ -20,7 +20,7 @@ public class CCYBackup {
 	public static CCYBackup instance;
 
 	// Says where the client and server 'proxy' code is loaded.
-	@SidedProxy(clientSide = "com.github.chinchangyang.CommonProxy", serverSide = "com.github.chinchangyang.server.ServerProxy")
+	@SidedProxy(clientSide = "ccybackup.CommonProxy", serverSide = "ccybackup.server.ServerProxy")
 	public static CommonProxy proxy;
 	
 	public static int playerNumber = 0;

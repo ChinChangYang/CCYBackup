@@ -1,4 +1,4 @@
-package com.github.chinchangyang.server;
+package ccybackup.server;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,9 +9,8 @@ import java.io.OutputStream;
 import java.util.Calendar;
 import java.util.logging.Logger;
 
-import com.github.chinchangyang.CCYBackup;
-import com.github.chinchangyang.CommonProxy;
-
+import ccybackup.CCYBackup;
+import ccybackup.CommonProxy;
 import cpw.mods.fml.server.FMLServerHandler;
 
 public class ServerProxy extends CommonProxy {
@@ -32,7 +31,7 @@ public class ServerProxy extends CommonProxy {
 
 					if (shouldBackup) {
 
-						FMLServerHandler.instance().getServer().g("save-all");
+						FMLServerHandler.instance().getServer().executeCommand("save-all");
 						String backupRootName = getBackupRoot();
 						File backupRoot = new File(backupRootName);
 
