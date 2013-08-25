@@ -1,0 +1,17 @@
+{
+  "modinfoversion": 1,
+  "modlist": [{
+    "modid": "CCYBackup",
+    "name": "CCY's Backup",
+    "description": "Automatically backup worlds",
+    "version": "0.0.4",
+    "mcversion": "1.6.2",
+    "url": "https://github.com/ChinChangYang/CCYBackup",
+    "updateUrl": "",
+    "authors": [ "Chin-Chang Yang"],
+    "credits": "Created by Chin-Chang Yang",
+    "logoFile": "",
+    "requiredMods": [ "Forge" ],
+    "useDependencyInformation": "false"
+  }]
+}
