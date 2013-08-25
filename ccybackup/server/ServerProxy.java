@@ -14,6 +14,11 @@ import ccybackup.CommonProxy;
 import cpw.mods.fml.server.FMLServerHandler;
 
 public class ServerProxy extends CommonProxy {
+		
+	/**
+	 * Minimum sleep time for fool-proofing interval configuration
+	 */
+	public final static long MINIMUM_SLEEP_TIME = 10 * 1000;
 
 	@Override
 	public void startBackupThread() {
@@ -70,6 +75,7 @@ public class ServerProxy extends CommonProxy {
 					}
 
 					try {
+						long sleepTime = Math.max(interval, MINIMUM_SLEEP_TIME);
 						Thread.sleep(interval);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
