@@ -26,6 +26,8 @@ public class CCYBackup {
 	public static int playerNumber = 0;
 	
 	public static boolean saved = true;
+	
+	private boolean backupEnabled;
 
 	private int backupInterval;
 
@@ -37,6 +39,8 @@ public class CCYBackup {
 				event.getSuggestedConfigurationFile());
 		config.load();
 
+		backupEnabled = config.get(Configuration.CATEGORY_GENERAL, "BackupEnabled", true).getBoolean(true);
+		
 		backupInterval = config.get(Configuration.CATEGORY_GENERAL,
 				"BackupInterval", 15 * 60).getInt();
 
@@ -53,6 +57,7 @@ public class CCYBackup {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+		proxy.setBackupEnabled(backupEnabled);
 		proxy.setBackupInterval(backupInterval);
 		proxy.setBackupRoot(backupRoot);
 		proxy.startBackupThread();

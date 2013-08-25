@@ -14,7 +14,7 @@ import ccybackup.CommonProxy;
 import cpw.mods.fml.server.FMLServerHandler;
 
 public class ServerProxy extends CommonProxy {
-		
+
 	/**
 	 * Minimum sleep time for fool-proofing interval configuration
 	 */
@@ -30,13 +30,16 @@ public class ServerProxy extends CommonProxy {
 
 			public void run() {
 				while (true) {
-					boolean shouldBackup = (System.currentTimeMillis() > startTime
+					boolean shouldSaveAll = (System.currentTimeMillis() > startTime
 							+ Math.round(0.5 * interval))
 							&& (CCYBackup.playerNumber > 0 || !CCYBackup.saved);
 
-					if (shouldBackup) {
+					if (shouldSaveAll) {
+						FMLServerHandler.instance().getServer()
+								.executeCommand("save-all");
+					}
 
-						FMLServerHandler.instance().getServer().executeCommand("save-all");
+					if (shouldSaveAll && isBackupEnabled()) {
 						String backupRootName = getBackupRoot();
 						File backupRoot = new File(backupRootName);
 
